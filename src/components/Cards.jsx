@@ -210,9 +210,11 @@ const Cards = () => {
         )}
       </div>
       <div
-        className={`cards ${
-          showSpinner ? "d-none" : "d-flex"
-        } justify-content-between ${showAll ? "flex-wrap" : ""} ${
+        className={`cards ${showSpinner ? "d-none" : "d-flex"} ${
+          location.pathname === "/favorites" && favMovie.length < 3
+            ? "justify-content-start gap-5"
+            : "justify-content-between"
+        } ${showAll ? "flex-wrap" : ""} ${
           location.pathname === "/favorites" ? "flex-wrap" : ""
         } ${location.pathname === "/favorites" ? "cards_favorite" : ""} ${
           location.pathname === "/user" ? "d-none" : "d-block"
