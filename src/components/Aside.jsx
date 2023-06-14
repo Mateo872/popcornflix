@@ -5,6 +5,8 @@ import {
   BsHeartFill,
   BsPerson,
   BsPersonFill,
+  BsPersonDash,
+  BsPersonFillDash,
 } from "react-icons/bs";
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -112,12 +114,12 @@ const Aside = () => {
               location.pathname === "/user" ? "active" : ""
             }`}
           >
-            {location.pathname === "/user" ? (
-              <BsPersonFill
-                className={` ${
-                  location.pathname === "/user" ? "active_icon" : ""
-                }`}
-              />
+            {location.pathname === "/user" && userLS ? (
+              <BsPersonFillDash className="active_icon" />
+            ) : location.pathname === "/user" && !userLS ? (
+              <BsPersonFill className="active_icon" />
+            ) : location.pathname !== "/user" && userLS ? (
+              <BsPersonDash />
             ) : (
               <BsPerson />
             )}
