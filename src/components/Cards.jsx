@@ -11,7 +11,7 @@ const Cards = () => {
   const [showAll, setShowAll] = useState(false);
   const [movies, setMovies] = useState([]);
   const [input, setInput] = useState("");
-  const [selectedFilter, setSelectedFilter] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState("all");
   const [randomNumber, setRandomNumber] = useState(
     Math.floor(Math.random() * 20)
   );
@@ -21,7 +21,7 @@ const Cards = () => {
   let filter = "all";
 
   const handleFilter = (e) => {
-    filter = e.target.id;
+    filter = e.target.id === "all" ? "all" : parseInt(e.target.id);
 
     const fetchData = async () => {
       try {
@@ -56,6 +56,7 @@ const Cards = () => {
         const data = await response.json();
         setShowSpinner(true);
         setMovies(data.results);
+        setSelectedFilter("all");
         setTimeout(() => {
           setShowSpinner(false);
         }, 500);
@@ -99,7 +100,7 @@ const Cards = () => {
             className={`filter mb-0 ${
               location.pathname === "/favorites" ? "d-none" : ""
             } ${
-              selectedFilter === "all" || selectedFilter.length === 0
+              selectedFilter === "all" || input.length > 0
                 ? "filter_active"
                 : ""
             }`}
@@ -110,7 +111,7 @@ const Cards = () => {
           <p
             id="35"
             className={`filter mb-0 ${
-              selectedFilter === "35" ? "filter_active" : ""
+              selectedFilter === 35 && input.length === 0 ? "filter_active" : ""
             }${location.pathname === "/favorites" ? "d-none" : ""}`}
             onClick={handleFilter}
           >
@@ -119,7 +120,7 @@ const Cards = () => {
           <p
             id="27"
             className={`filter mb-0 ${
-              selectedFilter === "27" ? "filter_active" : ""
+              selectedFilter === 27 && input.length === 0 ? "filter_active" : ""
             }${location.pathname === "/favorites" ? "d-none" : ""}`}
             onClick={handleFilter}
           >
@@ -128,7 +129,7 @@ const Cards = () => {
           <p
             id="18"
             className={`filter mb-0 ${
-              selectedFilter === "18" ? "filter_active" : ""
+              selectedFilter === 18 && input.length === 0 ? "filter_active" : ""
             }${location.pathname === "/favorites" ? "d-none" : ""}`}
             onClick={handleFilter}
           >
@@ -137,7 +138,7 @@ const Cards = () => {
           <p
             id="52"
             className={`filter mb-0 ${
-              selectedFilter === "52" ? "filter_active" : ""
+              selectedFilter === 52 && input.length === 0 ? "filter_active" : ""
             }${location.pathname === "/favorites" ? "d-none" : ""}`}
             onClick={handleFilter}
           >
@@ -178,15 +179,15 @@ const Cards = () => {
           <>
             <h4 className="mb-0">
               {location.pathname === "/"
-                ? selectedFilter === "all" || selectedFilter.length === 0
+                ? selectedFilter === "all" || input.length > 0
                   ? "Lo más visto"
-                  : selectedFilter === "35"
+                  : selectedFilter === 35
                   ? "Comedia"
-                  : selectedFilter === "27"
+                  : selectedFilter === 27
                   ? "Terror"
-                  : selectedFilter === "18"
+                  : selectedFilter === 18
                   ? "Drama"
-                  : selectedFilter === "52"
+                  : selectedFilter === 52
                   ? "Suspenso"
                   : ""
                 : location.pathname === "/favorites" && favMovie.length > 0

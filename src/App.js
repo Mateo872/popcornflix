@@ -4,10 +4,11 @@ import Aside from "./components/Aside";
 import Container from "./components/Container";
 import Header from "./components/Header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import FavoritesCards from "./components/FavoritesCards";
 import DetailContainer from "./components/DetailContainer";
 import UserContainer from "./components/UserContainer";
 import Error404 from "./components/Error404";
+import ProtectedRoutes from "./components/routes/ProtectedRoutes";
+import AdminRoutes from "./components/routes/AdminRoutes";
 
 function App() {
   return (
@@ -24,7 +25,14 @@ function App() {
           }
         />
         <Route path="/detail/:id" element={<DetailContainer />} />
-        <Route path="/favorites" element={<FavoritesCards />} />
+        <Route
+          path="/favorites/*"
+          element={
+            <ProtectedRoutes>
+              <AdminRoutes />
+            </ProtectedRoutes>
+          }
+        />
         <Route path="/user" element={<UserContainer />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
