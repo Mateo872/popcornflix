@@ -74,7 +74,7 @@ const Aside = () => {
             to={"/favorites"}
             className={`icon_container flex-column justify-content-center align-items-lg-center ${
               location.pathname === "/favorites" ? "icon_container-active" : ""
-            } ${userLS ? "flex" : "d-none"}`}
+            } ${userLS ? "d-flex" : "d-none"}`}
           >
             <div
               className={`container_badge ${
