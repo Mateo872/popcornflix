@@ -8,6 +8,9 @@ const Banner = ({ movie }) => {
   const [movieDetail, setMovieDetail] = useState(null);
   const [isFav, setIsFav] = useState(false);
   let favMovies = JSON.parse(localStorage.getItem("favMovies")) || [];
+  const [userLS, setUserLS] = useState(
+    JSON.parse(localStorage.getItem("user")) || []
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,7 +58,7 @@ const Banner = ({ movie }) => {
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://image.tmdb.org/t/p/w500${backdropUrl})`,
       }}
     >
-      {location.pathname !== "/" ? (
+      {location.pathname !== "/" && userLS.name ? (
         !isFav ? (
           <BsBookmark className="icon_fav" onClick={handleToggleFav} />
         ) : (

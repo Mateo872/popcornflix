@@ -14,6 +14,9 @@ const Aside = () => {
   const [favMovie, setFavMovie] = useState(
     JSON.parse(localStorage.getItem("favMovies")) || []
   );
+  const [userLS, setUserLS] = useState(
+    JSON.parse(localStorage.getItem("user")) || []
+  );
 
   useEffect(() => {
     const updateFavMovie = () => {
@@ -24,9 +27,17 @@ const Aside = () => {
         setFavMovie([]);
       }
     };
+
+    const updateUser = () => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      setUserLS(user);
+    };
+
     const handleUpdate = () => {
       updateFavMovie();
+      updateUser();
     };
+
     const intervalId = setInterval(handleUpdate, 1);
     return () => {
       clearInterval(intervalId);
@@ -61,9 +72,9 @@ const Aside = () => {
           </Link>
           <Link
             to={"/favorites"}
-            className={`icon_container d-flex flex-column justify-content-center align-items-lg-center ${
+            className={`icon_container flex-column justify-content-center align-items-lg-center ${
               location.pathname === "/favorites" ? "icon_container-active" : ""
-            }`}
+            } ${userLS ? "flex" : "d-none"}`}
           >
             <div
               className={`container_badge ${

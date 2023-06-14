@@ -9,6 +9,9 @@ const CardItem = ({ movie }) => {
   const [movieRelated, setMovieRelated] = useState(null);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
   const favMovie = JSON.parse(localStorage.getItem("favMovies")) || [];
+  const [userLS, setUserLS] = useState(
+    JSON.parse(localStorage.getItem("user")) || []
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -96,6 +99,11 @@ const CardItem = ({ movie }) => {
           location.pathname === "/favorites" ? "d-none" : "d-block"
         }`}
       >
+        {userLS.name && favoriteMovies.find((fav) => fav.id === movie.id) ? (
+          <BsBookmarkFill className="icon_fav" />
+        ) : (
+          <></>
+        )}
         <div
           className={`card_full`}
           style={{

@@ -147,7 +147,6 @@ const User = () => {
           className="logout_image"
           style={{ backgroundImage: `url(${backdropUrl})` }}
         ></div>
-        <h2>{userLS.name && userLS.name}</h2>
       </div>
       <div
         className={`button_container d-flex flex-lg-row flex-column mt-3 gap-2 ${
