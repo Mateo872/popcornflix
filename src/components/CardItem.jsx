@@ -99,8 +99,12 @@ const CardItem = ({ movie }) => {
           location.pathname === "/favorites" ? "d-none" : "d-block"
         }`}
       >
-        {userLS.name && favoriteMovies.find((fav) => fav.id === movie.id) ? (
-          <BsBookmarkFill className="icon_fav" />
+        {location.pathname === "/" ? (
+          userLS.name && favoriteMovies.find((fav) => fav.id === movie.id) ? (
+            <BsBookmarkFill className="icon_fav" />
+          ) : (
+            <></>
+          )
         ) : (
           <></>
         )}
