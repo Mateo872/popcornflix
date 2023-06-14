@@ -34,7 +34,7 @@ const Cards = () => {
         const data = await response.json();
         setShowSpinner(true);
         setSelectedFilter(filter);
-        setMovies(data.results);
+        setMovies(data.results.sort(() => Math.random() - 0.5));
         setTimeout(() => {
           setShowSpinner(false);
         }, 500);
@@ -55,7 +55,7 @@ const Cards = () => {
         const response = await fetch(url);
         const data = await response.json();
         setShowSpinner(true);
-        setMovies(data.results);
+        setMovies(data.results.sort(() => Math.random() - 0.5));
         setSelectedFilter("all");
         setTimeout(() => {
           setShowSpinner(false);
