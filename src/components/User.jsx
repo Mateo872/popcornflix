@@ -87,8 +87,8 @@ const User = () => {
                   message: "La cantidad mínima de caracteres es de 5 dígitos",
                 },
                 maxLength: {
-                  value: 100,
-                  message: "La cantidad máxima de caracteres es de 100 dígitos",
+                  value: 15,
+                  message: "La cantidad máxima de caracteres es de 15 dígitos",
                 },
               })}
             />
@@ -147,6 +147,7 @@ const User = () => {
           className="logout_image"
           style={{ backgroundImage: `url(${backdropUrl})` }}
         ></div>
+        <h2>{`Hola, ${userLS.name}`}</h2>
       </div>
       <div
         className={`button_container d-flex flex-lg-row flex-column mt-3 gap-2 ${
