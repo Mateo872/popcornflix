@@ -26,7 +26,7 @@ function App() {
         />
         <Route path="/detail/:id" element={<DetailContainer />} />
         <Route
-          path="/favorites"
+          path="/favorites/*"
           element={
             <ProtectedRoutes>
               <AdminRoutes />

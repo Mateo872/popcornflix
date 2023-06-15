@@ -15,6 +15,9 @@ const User = () => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [isUser, setIsUser] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    JSON.parse(localStorage.getItem("darkMode"))
+  );
 
   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem("user"));
@@ -25,6 +28,26 @@ const User = () => {
       setIsUser(false);
       setIsEditing(false);
     }
+  }, []);
+
+  useEffect(() => {
+    const handleDarkMode = () => {
+      const darkMode = JSON.parse(localStorage.getItem("darkMode"));
+      if (darkMode) {
+        setDarkMode(darkMode);
+      } else {
+        setDarkMode(false);
+      }
+    };
+
+    const handleUpdate = () => {
+      handleDarkMode();
+    };
+
+    const intervalId = setInterval(handleUpdate, 1);
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   const onSubmit = (user) => {
@@ -39,11 +62,19 @@ const User = () => {
       title: "¿Está seguro que desea cerrar sesión?",
       text: "Tendrá que iniciar sesión nuevamente para acceder a su cuenta.",
       icon: "warning",
+      iconColor: `${darkMode ? "#FEE27D" : "#EE332C"}`,
       showCancelButton: true,
-      confirmButtonColor: "#FEE27D",
-      cancelButtonColor: "#fff",
       confirmButtonText: "Cerrar sesión",
       cancelButtonText: "Cancelar",
+      customClass: {
+        confirmButton: `${
+          darkMode ? "swal-confirm-button-light" : "swal-confirm-button"
+        }`,
+        cancelButton: ` ${
+          darkMode ? "swal-cancel-button-light" : "swal-cancel-button"
+        }`,
+        popup: `${darkMode ? "swal-popup-light" : "swal-popup-custom"}`,
+      },
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem("user");
@@ -72,10 +103,17 @@ const User = () => {
           isEditing || !isUser ? "d-flex" : "d-none"
         }`}
       >
-        <h1>INICIAR SESIÓN</h1>
+        <h1 style={darkMode ? { color: "#161616" } : { color: "#fff" }}>
+          INICIAR SESIÓN
+        </h1>
         <Form className="form_container" onSubmit={handleSubmit(onSubmit)}>
           <Form.Group className="mb-3">
-            <Form.Label htmlFor="user">Usuario</Form.Label>
+            <Form.Label
+              style={darkMode ? { color: "#161616" } : { color: "#fff" }}
+              htmlFor="user"
+            >
+              Usuario
+            </Form.Label>
             <Form.Control
               type="text"
               placeholder="Usuario"
@@ -97,7 +135,12 @@ const User = () => {
             </Form.Text>
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label htmlFor="password">Contraseña</Form.Label>
+            <Form.Label
+              style={darkMode ? { color: "#161616" } : { color: "#fff" }}
+              htmlFor="password"
+            >
+              Contraseña
+            </Form.Label>
             <Form.Control
               type="password"
               placeholder="Contraseña"
@@ -116,7 +159,12 @@ const User = () => {
             </Form.Text>
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label htmlFor="image">Imagen URL</Form.Label>
+            <Form.Label
+              style={darkMode ? { color: "#161616" } : { color: "#fff" }}
+              htmlFor="image"
+            >
+              Imagen URL
+            </Form.Label>
             <Form.Control
               type="text"
               placeholder="URL de la imagen"
@@ -133,7 +181,10 @@ const User = () => {
               {errors.image?.message}
             </Form.Text>
           </Form.Group>
-          <Button type="submit" className="w-100 mt-1">
+          <Button
+            type="submit"
+            className={`w-100 mt-1 ${darkMode ? "submit_light" : ""}`}
+          >
             {isEditing ? "Guardar" : "Iniciar Sesión"}
           </Button>
         </Form>
@@ -147,7 +198,9 @@ const User = () => {
           className="logout_image"
           style={{ backgroundImage: `url(${backdropUrl})` }}
         ></div>
-        <h2>{`Hola, ${userLS.name}`}</h2>
+        <h2
+          style={darkMode ? { color: "#161616" } : { color: "#fff" }}
+        >{`Hola, ${userLS.name}`}</h2>
       </div>
       <div
         className={`button_container d-flex flex-lg-row flex-column mt-3 gap-2 ${
@@ -156,14 +209,16 @@ const User = () => {
       >
         <button
           type="submit"
-          className="w-100 edit_button"
+          className={`w-100 edit_button ${darkMode ? "button_light-edit" : ""}`}
           onClick={() => handleUpdate(userLS)}
         >
           Editar
         </button>
         <button
           type="submit"
-          className="w-100 delete_button"
+          className={`w-100 logout_button ${
+            darkMode ? "button_light-logout" : ""
+          }`}
           onClick={() => handleLogout(userLS)}
         >
           Logout

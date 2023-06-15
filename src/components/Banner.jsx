@@ -11,6 +11,9 @@ const Banner = ({ movie }) => {
   const [userLS, setUserLS] = useState(
     JSON.parse(localStorage.getItem("user")) || []
   );
+  const [darkMode, setDarkMode] = useState(
+    JSON.parse(localStorage.getItem("darkMode"))
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,6 +32,26 @@ const Banner = ({ movie }) => {
   useEffect(() => {
     setIsFav(favMovies.includes(id));
   }, [id, favMovies]);
+
+  useEffect(() => {
+    const handleDarkMode = () => {
+      const darkMode = JSON.parse(localStorage.getItem("darkMode"));
+      if (darkMode) {
+        setDarkMode(darkMode);
+      } else {
+        setDarkMode(false);
+      }
+    };
+
+    const handleUpdate = () => {
+      handleDarkMode();
+    };
+
+    const intervalId = setInterval(handleUpdate, 1);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   const handleToggleFav = () => {
     setIsFav(!isFav);
@@ -62,7 +85,11 @@ const Banner = ({ movie }) => {
         !isFav ? (
           <BsBookmark className="icon_fav" onClick={handleToggleFav} />
         ) : (
-          <BsBookmarkFill className="icon_fav" onClick={handleToggleFav} />
+          <BsBookmarkFill
+            className="icon_fav"
+            onClick={handleToggleFav}
+            style={darkMode ? { color: "#EE332C" } : { color: "#FEE27D" }}
+          />
         )
       ) : null}
 

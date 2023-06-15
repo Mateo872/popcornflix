@@ -23,10 +23,6 @@ header nav ul a {
     font-weight: bold;
 }
 
-header nav ul span {
-    color: #FEE27D;
-}
-
 header nav ul .user_container {
     display: flex;
     align-items: center;
@@ -41,7 +37,7 @@ header nav ul .user_container .user_image {
     width: 2rem;
     border-radius: .5rem;
     background-color: #ddd;
-    border: 2px solid #FEE27D;
+    border: 2px solid;
     background-size: cover;
     background-position: 50%;
 }
@@ -96,10 +92,6 @@ main .container article .background_icon i {
 
 .active {
     background-color: rgba(81, 81, 81, 0.4);
-}
-
-main .container article .background_icon .active_icon {
-    color: #FEE27D;
 }
 
 .main .container_movie {
@@ -316,7 +308,7 @@ main .container article .background_icon .active_icon {
     align-items: center;
     position: absolute;
     border-radius: 100%;
-    background-color: #FF1C1C;
+    background-color: #EE332C;
     font-size: 0.8rem;
     top: 5.6rem;
     margin-left: 0.9rem;
@@ -395,29 +387,114 @@ main .container article .background_icon .active_icon {
     border: 2px solid transparent;
 }
 
-.delete_button {
+.logout_button {
     background-color: #FEE27D;
     color: #161616;
     border: 2px solid transparent;
 }
 
-.delete_button:hover {
+.logout_button:hover {
     background-color: transparent;
     color: #FEE27D;
     border: 2px solid #FEE27D;
 }
 
-.swal2-popup {
-    background-color: #161616;
+.button_light-edit {
+    background-color: transparent;
+    color: #EE332C;
+    border: 2px solid #EE332C;
+}
+
+.button_light-edit:hover {
+    background-color: #EE332C;
     color: #fff;
 }
 
-.swal2-popup .swal2-confirm {
+.button_light-logout {
+    background-color: #EE332C;
+    color: #fff;
+    border: 2px solid transparent;
+}
+
+.button_light-logout:hover {
+    background-color: transparent;
+    color: #EE332C;
+    border: 2px solid #EE332C;
+}
+
+.swal-popup-custom {
+    background-color: #fff;
     color: #161616;
 }
 
-.swal2-popup .swal2-cancel {
+.swal-popup-custom .swal-confirm-button {
+    background-color: #EE332C;
+    color: #fff;
+    border: 2px solid transparent;
+    transition: .3s;
+}
+
+.swal2-actions .swal-confirm-button-light {
+    background-color: #FEE27D;
     color: #161616;
+    border: 2px solid #FEE27D;
+    transition: .3s;
+}
+
+.swal2-actions .swal-confirm-button-light:hover {
+    background-color: transparent;
+    color: #FEE27D;
+}
+
+.swal2-actions .swal-cancel-button-light {
+    background-color: transparent;
+    color: #FEE27D;
+    border: 2px solid #FEE27D;
+    transition: .3s;
+}
+
+.swal2-actions .swal-cancel-button-light:hover {
+    background-color: #FEE27D;
+    color: #161616
+}
+
+.swal-confirm-button:hover {
+    background-color: #fff;
+    border: 2px solid #EE332C;
+    color: #EE332C;
+}
+
+.form_container .submit_light {
+    background-color: #EE332C;
+    color: #fff;
+    border: 2px solid transparent;
+}
+
+.form_container .submit_light:hover {
+    background-color: transparent;
+    color: #EE332C;
+    border: 2px solid #EE332C;
+}
+
+.swal2-container .swal2-actions:not(.swal2-loading) .swal2-styled:hover {
+    background-image: none;
+}
+
+.swal-popup-custom .swal-cancel-button {
+    background-color: transparent;
+    color: #EE332C;
+    border: 2px solid #EE332C;
+    transition: .3s;
+}
+
+.swal-popup-custom .swal-cancel-button:hover {
+    background-color: #EE332C;
+    color: #fff;
+}
+
+.swal-popup-light {
+    background-color: #161616;
+    color: #fff;
 }
 
 .main_error {
@@ -432,6 +509,28 @@ main .container article .background_icon .active_icon {
 
 .fav_empty {
     margin-top: 8rem;
+}
+
+.main .themeLight {
+    background-color: #fff;
+}
+
+.filterLight {
+    background-color: rgba(0, 0, 0, .9);
+}
+
+.filter_active-light {
+    background-color: #EE332C;
+    color: #fff;
+}
+
+.filterLight:hover {
+    background-color: #EE332C;
+    color: #fff;
+}
+
+.main .container article .icon_container-active-light {
+    border-left: 2px solid #161616;
 }
 
 @media (min-width: 767px) {
@@ -603,7 +702,7 @@ main .container article .background_icon .active_icon {
         padding: .9rem;
     }
 
-    .delete_button {
+    .logout_button {
         padding: .9rem;
     }
 
@@ -672,6 +771,10 @@ main .container article .background_icon .active_icon {
         border-left: 2px solid #FEE27D;
         transition: .3s;
         cursor: pointer;
+    }
+
+    main .container_navbar article .hover_light:hover {
+        border-left: 2px solid #161616;
     }
 
     .filter_container {

@@ -17,6 +17,9 @@ const Cards = () => {
   );
   const favMovie = JSON.parse(localStorage.getItem("favMovies")) || [];
   const [showSpinner, setShowSpinner] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    JSON.parse(localStorage.getItem("darkMode"))
+  );
 
   let filter = "all";
 
@@ -68,6 +71,26 @@ const Cards = () => {
     fetchData();
   }, [input]);
 
+  useEffect(() => {
+    const handleDarkMode = () => {
+      const darkMode = JSON.parse(localStorage.getItem("darkMode"));
+      if (darkMode) {
+        setDarkMode(darkMode);
+      } else {
+        setDarkMode(false);
+      }
+    };
+
+    const handleUpdate = () => {
+      handleDarkMode();
+    };
+
+    const intervalId = setInterval(handleUpdate, 1);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
   return (
     <>
       {location.pathname === "/favorites" && favMovie.length === 0 ? (
@@ -76,7 +99,10 @@ const Cards = () => {
             favMovie.length === 0 ? "d-flex" : "d-none"
           } flex-column justify-content-center align-items-center fav_empty`}
         >
-          <ClimbingBoxLoader color="#FEE27D" size={15} />
+          <ClimbingBoxLoader
+            color={`${darkMode ? "#EE332C" : "#FEE27D"}`}
+            size={15}
+          />
           <h2
             className="mt-4"
             style={{ color: "#fff", fontSize: "1rem", opacity: ".7" }}
@@ -94,15 +120,19 @@ const Cards = () => {
             : "d-flex"
         }`}
       >
-        <div className="d-flex filter_container justify-content-between w-100">
+        <div
+          className={`d-flex filter_container justify-content-between w-100`}
+        >
           <p
             id="all"
-            className={`filter mb-0 ${
+            className={`filter ${darkMode ? "filterLight" : ""} mb-0 ${
               location.pathname === "/favorites" ? "d-none" : ""
             } ${
               selectedFilter === "all" || input.length > 0
                 ? "filter_active"
                 : ""
+            } ${
+              darkMode && selectedFilter === "all" ? "filter_active-light" : ""
             }`}
             onClick={handleFilter}
           >
@@ -110,41 +140,64 @@ const Cards = () => {
           </p>
           <p
             id="35"
-            className={`filter mb-0 ${
+            className={`filter ${darkMode ? "filterLight" : ""} mb-0 ${
               selectedFilter === 35 && input.length === 0 ? "filter_active" : ""
-            }${location.pathname === "/favorites" ? "d-none" : ""}`}
+            }${location.pathname === "/favorites" ? "d-none" : ""} ${
+              selectedFilter === 35 && input.length === 0 && darkMode
+                ? "filter_active-light"
+                : ""
+            }`}
             onClick={handleFilter}
           >
             Comedia
           </p>
           <p
             id="27"
-            className={`filter mb-0 ${
+            className={`filter ${darkMode ? "filterLight" : ""} mb-0 ${
               selectedFilter === 27 && input.length === 0 ? "filter_active" : ""
-            }${location.pathname === "/favorites" ? "d-none" : ""}`}
+            }${location.pathname === "/favorites" ? "d-none" : ""} ${
+              selectedFilter === 27 && input.length === 0 && darkMode
+                ? "filter_active-light"
+                : ""
+            }`}
             onClick={handleFilter}
           >
             Terror
           </p>
           <p
             id="18"
-            className={`filter mb-0 ${
+            className={`filter ${darkMode ? "filterLight" : ""} mb-0 ${
               selectedFilter === 18 && input.length === 0 ? "filter_active" : ""
-            }${location.pathname === "/favorites" ? "d-none" : ""}`}
+            }${location.pathname === "/favorites" ? "d-none" : ""} ${
+              selectedFilter === 18 && input.length === 0 && darkMode
+                ? "filter_active-light"
+                : ""
+            }`}
             onClick={handleFilter}
           >
             Drama
           </p>
           <p
             id="52"
-            className={`filter mb-0 ${
+            className={`filter ${darkMode ? "filterLight" : ""} mb-0 ${
               selectedFilter === 52 && input.length === 0 ? "filter_active" : ""
-            }${location.pathname === "/favorites" ? "d-none" : ""}`}
+            }${location.pathname === "/favorites" ? "d-none" : ""} ${
+              selectedFilter === 52 && input.length === 0 && darkMode
+                ? "filter_active-light"
+                : ""
+            }`}
             onClick={handleFilter}
           >
             Suspenso
           </p>
-          <div className={`input_container d-flex align-items-center`}>
+          <div
+            className={`input_container d-flex align-items-center`}
+            style={
+              darkMode
+                ? { backgroundColor: "rgba(0, 0, 0, .9)" }
+                : { backgroundColor: "rgba(81, 81, 81, 0.4)" }
+            }
+          >
             <BsSearch />
             <input
               type="text"
@@ -160,7 +213,7 @@ const Cards = () => {
             showSpinner ? "d-flex" : "d-none"
           } justify-content-center align-items-center vh-100`}
         >
-          <BeatLoader color="#FEE27D" size={20} />
+          <BeatLoader color={`${darkMode ? "#EE332C" : "#FEE27D"}`} size={20} />
         </div>
       ) : null}
       <div
@@ -177,7 +230,10 @@ const Cards = () => {
       >
         {movies.length > 0 && (
           <>
-            <h4 className="mb-0">
+            <h4
+              className="mb-0"
+              style={darkMode ? { color: "#161616" } : { color: "#fff" }}
+            >
               {location.pathname === "/"
                 ? selectedFilter === "all" || input.length > 0
                   ? "Lo más visto"
@@ -204,8 +260,19 @@ const Cards = () => {
                 location.pathname === "/" ? "d-block" : "d-none"
               }`}
               onClick={() => setShowAll(!showAll)}
+              style={
+                darkMode
+                  ? { color: "#EE332C", fontWeight: "bold" }
+                  : { color: "#FEE27D", fontWeight: "bold" }
+              }
             >
-              {!showAll ? "Ver todo" : <BsArrowLeft />}
+              {!showAll ? (
+                "Ver todo"
+              ) : (
+                <BsArrowLeft
+                  style={darkMode ? { color: "#EE332C" } : { color: "#FEE27D" }}
+                />
+              )}
             </p>
           </>
         )}

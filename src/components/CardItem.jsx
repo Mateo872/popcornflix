@@ -12,6 +12,9 @@ const CardItem = ({ movie }) => {
   const [userLS, setUserLS] = useState(
     JSON.parse(localStorage.getItem("user")) || []
   );
+  const [darkMode, setDarkMode] = useState(
+    JSON.parse(localStorage.getItem("darkMode"))
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +59,26 @@ const CardItem = ({ movie }) => {
     fetchFavoriteMovies();
   }, []);
 
+  useEffect(() => {
+    const handleDarkMode = () => {
+      const darkMode = JSON.parse(localStorage.getItem("darkMode"));
+      if (darkMode) {
+        setDarkMode(darkMode);
+      } else {
+        setDarkMode(false);
+      }
+    };
+
+    const handleUpdate = () => {
+      handleDarkMode();
+    };
+
+    const intervalId = setInterval(handleUpdate, 1);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
   const backgroundImage =
     location.pathname === "/"
       ? `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`
@@ -70,7 +93,10 @@ const CardItem = ({ movie }) => {
             className={`card_container`}
             key={movieFav.id}
           >
-            <BsBookmarkFill className="icon_fav" />
+            <BsBookmarkFill
+              className="icon_fav"
+              style={darkMode ? { color: "#EE332C" } : { color: "#FEE27D" }}
+            />
             <div
               className={`card_full`}
               style={{
@@ -78,9 +104,17 @@ const CardItem = ({ movie }) => {
               }}
             ></div>
             <div className="card_features d-flex justify-content-between align-items-center">
-              <h5 className="mb-0">{movieFav.title}</h5>
+              <h5
+                className="mb-0"
+                style={darkMode ? { color: "#161616" } : { color: "#fff" }}
+              >
+                {movieFav.title}
+              </h5>
               <div className="star d-flex align-items-center">
-                <BsStarFill className="star_icon" />
+                <BsStarFill
+                  className="star_icon"
+                  style={darkMode ? { color: "#EE332C" } : { color: "#FEE27D" }}
+                />
                 <p className="mb-0">
                   {parseInt(movieFav.vote_average).toString()}
                 </p>
@@ -101,7 +135,10 @@ const CardItem = ({ movie }) => {
       >
         {location.pathname === "/" ? (
           userLS.name && favoriteMovies.find((fav) => fav.id === movie.id) ? (
-            <BsBookmarkFill className="icon_fav" />
+            <BsBookmarkFill
+              className="icon_fav"
+              style={darkMode ? { color: "#EE332C" } : { color: "#FEE27D" }}
+            />
           ) : (
             <></>
           )
@@ -115,11 +152,17 @@ const CardItem = ({ movie }) => {
           }}
         ></div>
         <div className="card_features d-flex justify-content-between align-items-center">
-          <h5 className="mb-0">
+          <h5
+            className="mb-0"
+            style={darkMode ? { color: "#161616" } : { color: "#fff" }}
+          >
             {location.pathname === "/" ? movie.title : movieRelated?.title}
           </h5>
           <div className="star d-flex align-items-center">
-            <BsStarFill className="star_icon" />
+            <BsStarFill
+              className="star_icon"
+              style={darkMode ? { color: "#EE332C" } : { color: "#FEE27D" }}
+            />
             <p className="mb-0">
               {parseInt(
                 location.pathname === "/"
