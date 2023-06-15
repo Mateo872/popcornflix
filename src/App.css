@@ -530,7 +530,12 @@ main .container article .background_icon i {
 }
 
 .main .container article .icon_container-active-light {
-    border-left: 2px solid #161616;
+    border-top: 2px solid #161616;
+}
+
+
+main .container_navbar article .hover_light:hover {
+    border-top: 2px solid #161616;
 }
 
 @media (min-width: 767px) {
@@ -917,5 +922,15 @@ main .container article .background_icon i {
 
     .fav_empty {
         margin-top: 18rem;
+    }
+
+    .main .container article .icon_container-active-light {
+        border-top: 0;
+        border-left: 2px solid #161616;
+    }
+
+
+    main .container_navbar article .hover_light:hover {
+        border-left: 2px solid #161616;
     }
 }
