@@ -83,7 +83,11 @@ const Banner = ({ movie }) => {
     >
       {location.pathname !== "/" && userLS.name ? (
         !isFav ? (
-          <BsBookmark className="icon_fav" onClick={handleToggleFav} />
+          <BsBookmark
+            className="icon_fav"
+            onClick={handleToggleFav}
+            style={darkMode ? { color: "#EE332C" } : { color: "#FEE27D" }}
+          />
         ) : (
           <BsBookmarkFill
             className="icon_fav"

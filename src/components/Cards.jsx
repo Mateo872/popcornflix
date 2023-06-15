@@ -105,7 +105,11 @@ const Cards = () => {
           />
           <h2
             className="mt-4"
-            style={{ color: "#fff", fontSize: "1rem", opacity: ".7" }}
+            style={{
+              color: darkMode ? "#161616" : "#fff",
+              fontSize: "1rem",
+              opacity: ".7",
+            }}
           >
             No hay películas favoritas
           </h2>
