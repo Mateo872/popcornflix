@@ -140,7 +140,7 @@ main .container article .background_icon i {
 }
 
 .input_container input {
-    width: 9rem;
+    width: 100%;
     border: 0;
     outline: 0;
     background-color: transparent;
@@ -538,6 +538,10 @@ main .container_navbar article .hover_light:hover {
     border-top: 2px solid #161616;
 }
 
+.spinner {
+    margin-top: -8rem;
+}
+
 @media (min-width: 767px) {
     header nav {
         padding: 2rem;
@@ -713,6 +717,10 @@ main .container_navbar article .hover_light:hover {
 
     .fav_empty {
         margin-top: 13rem;
+    }
+
+    .spinner {
+        margin-top: -15rem;
     }
 }
 
@@ -932,5 +940,9 @@ main .container_navbar article .hover_light:hover {
 
     main .container_navbar article .hover_light:hover {
         border-left: 2px solid #161616;
+    }
+
+    .spinner {
+        margin-top: 0;
     }
 }

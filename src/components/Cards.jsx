@@ -215,7 +215,7 @@ const Cards = () => {
         <div
           className={`${
             showSpinner ? "d-flex" : "d-none"
-          } justify-content-center align-items-center vh-100`}
+          } justify-content-center align-items-center vh-100 spinner`}
         >
           <BeatLoader color={`${darkMode ? "#EE332C" : "#FEE27D"}`} size={20} />
         </div>
