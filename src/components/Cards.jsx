@@ -300,6 +300,10 @@ const Cards = () => {
           <>
             {movies && movies.length === 0 ? (
               <p className="message_empty mb-0">No se encontraron resultados</p>
+            ) : !showAll && window.innerWidth < 400 ? (
+              movies
+                .slice(0, 2)
+                .map((movie) => <CardItem key={movie.id} movie={movie} />)
             ) : !showAll ? (
               movies
                 .slice(0, 3)

@@ -247,7 +247,6 @@ main .container article .background_icon i {
 .cards {
     margin-top: .5rem;
     overflow-x: scroll;
-    gap: 1rem;
     scroll-snap-type: x mandatory;
 }
 
@@ -258,7 +257,7 @@ main .container article .background_icon i {
 }
 
 .card_full {
-    width: 10rem;
+    width: 7.35rem;
     height: 5rem;
     border-radius: .8rem;
     scroll-snap-align: start;
@@ -668,6 +667,7 @@ main .container_navbar article .hover_light:hover {
         margin-top: .5rem;
         max-height: 8rem;
         padding: 0 .8rem;
+        gap: 1rem;
     }
 
     .cards.flex-wrap {
